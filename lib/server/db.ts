@@ -45,7 +45,7 @@ type DB = Database.Database;
 export function getDb(): DB {
   const g = globalThis as unknown as { __mwdb?: DB };
   if (g.__mwdb) return g.__mwdb;
-  const dir = process.env.DATA_DIR || path.join(process.cwd(), "data");
+  const dir = process.env.DATA_DIR || "/tmp/mediway-data";
   fs.mkdirSync(dir, { recursive: true });
   const db = new Database(path.join(dir, "mediway.db"));
   db.pragma("journal_mode = WAL");
